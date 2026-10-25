@@ -10,9 +10,14 @@ class DashboardPage(BasePage):
     logout_button = "#logout_sidebar_link"
 
     def is_inventory_visible(self):
+        self.page.wait_for_selector(".inventory_item", timeout=10000)
+
+        count = self.page.locator(".inventory_item").count()
+
         print("URL:", self.page.url)
-        print("Count:", self.page.locator(".inventory_item").count())
-        return self.page.locator(".inventory_item").count() > 0
+        print("Count:", count)
+
+        return count > 0
 
     def click_cart_button(self):
         self.click(self.cart_button)
