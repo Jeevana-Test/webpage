@@ -8,10 +8,14 @@ def test_login_page(page:Page):
     login_page.navigate(BASE_URL)
     assert login_page.is_visible("#login-button"), "Login button is not visible"
 
-def test_invalid_login(page:Page):
-    login_page=BasePage(page)
+def test_invalid_login(page):
+    login_page = BasePage(page)
+
     login_page.navigate(BASE_URL)
-    login_page.fill("#user-name","invalid_user")
-    login_page.fill("#password","invalid_pass")
+    login_page.fill("#user-name", "invalid_user")
+    login_page.fill("#password", "invalid_pass")
     login_page.click("#login-button")
-    assert login_page.is_visible(".error-message"), "Error message is not visible for invalid login"
+
+    page.wait_for_selector("[data-test='error']")
+
+    assert login_page.is_visible("[data-test='error']")
