@@ -19,3 +19,22 @@ def test_invalid_login(page):
     page.wait_for_selector("[data-test='error']")
 
     assert login_page.is_visible("[data-test='error']")
+
+
+
+def test_login_empty_credentials(page: Page):
+    login_page = BasePage(page)
+
+    # Navigate to the login page
+    login_page.navigate(BASE_URL)
+
+    # Attempt to login with empty credentials
+    login_page.fill("#user-name", "")
+    login_page.fill("#password", "")
+    login_page.click("#login-button")
+
+    # Verify error message is displayed
+    page.wait_for_selector("[data-test='error']")
+    error_message = page.locator("[data-test='error']").text_content()
+    print(f"Error message for empty credentials: {error_message}")
+    assert login_page.is_visible("[data-test='error']")
