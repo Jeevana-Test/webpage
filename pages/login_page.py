@@ -8,7 +8,7 @@ class LoginPage(BasePage):
     User_name="#user-name"
     Password="#password"
     login_button="#login-button"
-    error_message=".error-message"
+    error_message=".error-message-container"
 
 
     def navigate_to_login_page(self):

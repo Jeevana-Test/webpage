@@ -3,13 +3,21 @@ from pages.base_page import BasePage
 class DashboardPage(BasePage):
     def __init__(self, page):
         super().__init__(page)
-    inventory_items = ".inventory_item"
+
+    inventory_item = ".inventory_item"
     cart_button = "#shopping_cart_container"
     menu_button = "#react-burger-menu-btn"
     logout_button = "#logout_sidebar_link"
 
     def is_inventory_visible(self):
-        return self.is_visible(self.inventory_items)
+        self.page.wait_for_selector(".inventory_item", timeout=10000)
+
+        count = self.page.locator(".inventory_item").count()
+
+        print("URL:", self.page.url)
+        print("Count:", count)
+
+        return count > 0
 
     def click_cart_button(self):
         self.click(self.cart_button)
