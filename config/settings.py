@@ -7,7 +7,7 @@ URLs, timeouts, credentials — single source of truth.
 BASE_URL = "https://www.saucedemo.com/"
 
 TIMEOUT  = 15000
-HEADLESS = True
+HEADLESS = False
 
 USERS={
     "valid_user":{"email":"standard_user",
